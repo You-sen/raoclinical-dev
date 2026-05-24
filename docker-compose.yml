@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  skillquix:
+    build: .
+    image: skillquix-dev
+    ports:
+      - "8889:8889"
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - skillquix_net
+
+  qdrant:
+    image: qdrant/qdrant
+    restart: always
+    ports:
+      - "6334:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - skillquix_net
+    
+
+volumes:
+  qdrant_data:
+
+networks:
+  skillquix_net:
+    driver: bridge
