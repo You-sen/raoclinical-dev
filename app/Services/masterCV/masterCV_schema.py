@@ -62,7 +62,7 @@ class MasterCVData(BaseModel):
     skills: Optional[List[str]] = None   # array of skill strings
     strength: Optional[List[str]] = None
     subDomain: Optional[List[str]] = None  # array from DB
-    experienceYear: Optional[Any] = None
+    totalExperienceYear: Optional[Any] = None
     version: Optional[int] = None
     projects: Optional[List[Any]] = None
     workExperiences: Optional[List[WorkExperienceInput]] = None
@@ -160,7 +160,7 @@ class EnhancedMasterCV(BaseModel):
     resumeLink: Optional[str] = None
     currentRole: Optional[str] = None
     careerStage: Optional[str] = None
-    experienceYear: Optional[int] = None
+    totalExperienceYear: Optional[int] = None
     domain: Optional[str] = None
     subDomain: Optional[str] = None       # resolved plain string
     industry: Optional[str] = None

@@ -186,7 +186,7 @@ async def enhance_cv_fields(cv: MasterCVData) -> dict:
 Role: {cv.currentRole}
 Domain: {cv.domain} / {cv.subDomain}
 Career stage: {cv.careerStage}
-Total experience: {cv.experienceYear} years
+Total experience: {cv.totalExperienceYear} years
  
 bio: {cv.bio}
 resumeSummary: {cv.resumeSummary}
@@ -299,7 +299,7 @@ async def score_existing_skills(raw_skills: list, cv: MasterCVData) -> list[dict
 currentRole: {cv.currentRole}
 domain: {cv.domain}
 subDomain: {cv.subDomain}
-experienceYear: {cv.experienceYear}
+totalExperienceYear: {cv.totalExperienceYear}
  
 Skills to score:
 {json.dumps(raw_skills)}
@@ -363,7 +363,7 @@ currentRole: {cv.currentRole}
 domain: {cv.domain}
 subDomain: {cv.subDomain}
 careerStage: {cv.careerStage}
-experienceYear: {cv.experienceYear}
+totalExperienceYear: {cv.totalExperienceYear}
  
 Candidate's current skills:
 {json.dumps([s.get("skillName") for s in current_skills])}
@@ -592,7 +592,7 @@ async def enhance_master_cv(
         currentRole=cv.currentRole,
         careerStage=cv.careerStage,
         languages=cv.languages,
-        experienceYear=int(cv.experienceYear) if cv.experienceYear else None,
+        totalExperienceYear=int(cv.totalExperienceYear) if cv.totalExperienceYear else None,
         domain=resolved_domain,
         subDomain=resolved_subdomain,
         industry=cv.industry,
