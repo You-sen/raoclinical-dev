@@ -60,7 +60,7 @@ class TailoredCVData(BaseModel):
     # Profile
     currentRole:         Optional[str] = None
     resumeSummary:       Optional[str] = None
-    experienceYear:      Optional[Any] = None
+    totalExperienceYear:      Optional[Any] = None
     # domain:              Optional[str] = None
     # subDomain:           Optional[str] = None
     # industry:            Optional[str] = None
