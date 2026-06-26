@@ -25,6 +25,7 @@ class MongoDB:
           self.resume_skill_collection = self.db['Skill']
           self.mentor_collection = self.db['MentorProfile']
           self.mentorMatch_collection = self.db['MentorMatch']
+          self.profile_score_collection = self.db['ProfileScore']
 
 
 
