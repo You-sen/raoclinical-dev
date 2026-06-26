@@ -59,7 +59,7 @@ async def update_profile_score(req: ProfileScoreRequest) -> ProfileScoreResponse
         "career_goal": career_goal,
         "current_role": current_role,
         "existing_traits": profile_score.get("TopTraits", []),
-        "recent_confidence": req.ConfidenceScore.dict() if req.ConfidenceScore else None
+        "recent_confidence": req.ConfidenceScore.model_dump(mode='json') if req.ConfidenceScore else None
     })
 
     system_prompt = """
