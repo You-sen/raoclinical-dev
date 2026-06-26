@@ -18,7 +18,7 @@ from app.Services.masterCV.masterCV_router import router as master_cv_router
 from app.Services.coverLetter.coverLetter_router import router as cover_letter_router
 from app.Services.tailorCV.tailorCV_router import router as tailor_cv_router
 from app.Services.interviewPrepare.interviewPrepare_router import router as interview_router
-
+from app.Services.careerJourney.careerJourney_router import router as career_journey_router
 
 from app.utils.cron import start_scheduler
 from app.Services.match_gig.match_gig import get_match_gig
@@ -75,7 +75,7 @@ app.include_router(master_cv_router,      prefix="/v1", tags=["MasterCV"])
 app.include_router(cover_letter_router, prefix="/v1", tags=["Cover Letter"])
 app.include_router(tailor_cv_router, prefix="/v1", tags=["Tailor CV"])
 app.include_router(interview_router, prefix="/v1", tags=["Interview Prepare"])
-
+app.include_router(career_journey_router, prefix="/v1/career-journey", tags=["Career Journey"])
 
 
 @app.get("/")
