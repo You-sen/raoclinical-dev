@@ -95,6 +95,11 @@ The API supports:
 |  |  |- mentor_match/             # Mentor recommendation from skill-gap embedding
 |  |  |- user_skillgap/            # User vs gig skill gap analysis
 |  |  |- clearity_score/           # Monthly activity scoring and cache logic
+|  |  |- masterCV/                 # Enhances user CV with AI-driven skills and STAR challenges
+|  |  |- coverLetter/              # Generates tailored cover letters from CV and job context
+|  |  |- tailorCV/                 # Rewrites CV dynamically to match a specific job description
+|  |  |- interviewPrepare/         # Generates personalized interview questions and scores answers
+|  |  |- careerJourney/            # Tracks career roadmap, profile scores, and growth timelines
 |  |
 |  |- utils/
 |     |- file_handler.py           # PDF/DOCX extraction utilities
@@ -157,6 +162,26 @@ The API supports:
 - Reset Qdrant collections.
 - Debug routes for embedding retrieval and collection inspection.
 
+### 4.10 Master CV
+- Accepts raw CV data and uses AI to enhance it.
+- Generates STAR-formatted challenges and identifies skill gaps.
+- Includes a standalone endpoint to enhance individual challenges.
+
+### 4.11 Cover Letter Generation
+- Dynamically generates a tailored cover letter based on user's enhanced CV and specific job details.
+
+### 4.12 Tailor CV
+- Rewrites a user's CV to best match a provided job description without altering the core truth of the resume.
+
+### 4.13 Interview Preparation
+- Generates personalized interview questions based on the user's CV.
+- Evaluates and scores candidate answers to behavioral and technical questions, returning clarity, relevance, and confidence metrics.
+
+### 4.14 Career Journey
+- Tracks a user's career momentum and growth trajectory.
+- Provides endpoints for Profile Score, Growth Timeline, Future Growth Path, Roadmap, and Opportunities.
+- Heavily relies on AI to analyze recent challenges and skills.
+
 ## 5) API Routes (Grouped)
 
 All routes are mounted under `/v1`.
@@ -207,6 +232,27 @@ All routes are mounted under `/v1`.
 
 ### MongoDB Utility
 - `GET /v1/get_match_score/{user_id}/{gig_id}`
+
+### Master CV
+- `POST /v1/master-cv/enhance`
+- `POST /v1/master-cv/enhance-challenge`
+
+### Cover Letter
+- `POST /v1/cover-letter/generate`
+
+### Tailor CV
+- `POST /v1/tailor-cv/generate`
+
+### Interview Prepare
+- `POST /v1/interview/questions`
+- `POST /v1/interview/score`
+
+### Career Journey
+- `POST /v1/career-journey/profile-score`
+- `GET /v1/career-journey/growth-timeline`
+- `GET /v1/career-journey/future-growth-path`
+- `GET /v1/career-journey/roadmap`
+- `GET /v1/career-journey/opportunities`
 
 ## 6) Environment Variables
 
