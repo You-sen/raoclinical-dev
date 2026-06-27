@@ -137,7 +137,7 @@ async def get_growth_timeline(user_id: str) -> GrowthTimelineResponse:
 
     system_prompt = """
     You are an AI Career Journey analyst. Given the candidate's confidence scores over time, recent challenges, and future vision, provide:
-    - Confidence Trajectory: A short string (e.g., "+15% boost", "Steady", "-5% declined").
+    - Confidence Trajectory: A short string (e.g., "Your confidence score got a +15% boost", "Your confidence score have improved Steadily over the period, "Your confidence score declined by -5%").
     - AI Insight: Analyze the last 3 challenges to identify which skills are getting a boost.
     - Next Best Action: Analyze challenges and skills to suggest the next best action towards their career goal.
     - progress: Based on the candidate's skills, challenges, and overall profile, estimate their progress toward achieving the future vision position by the target year. Return a string in this exact format: "You've grown X% toward your <target_year> vision" where X is your estimated percentage and <target_year> is from the futureVision target field.
