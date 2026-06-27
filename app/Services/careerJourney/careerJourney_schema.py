@@ -31,6 +31,7 @@ class GrowthTimelineResponse(BaseModel):
     ConfidenceTrajectory: str
     AIInsight: str
     NextBestAction: NextBestAction
+    progress: str
 
 class CareerPhase(BaseModel):
     Title: str
