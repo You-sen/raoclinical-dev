@@ -60,7 +60,7 @@ async def update_profile_score(req: ProfileScoreRequest) -> ProfileScoreResponse
         "current_role": current_role,
         "existing_traits": profile_score.get("TopTraits", []),
         "recent_confidence": req.ConfidenceScore.model_dump(mode='json') if req.ConfidenceScore else None
-    })
+    }, default=str)
 
     system_prompt = """
     You are an AI Career Journey analyst. Given the candidate's profile data, compute the following metrics:
@@ -126,18 +126,21 @@ async def get_growth_timeline(user_id: str) -> GrowthTimelineResponse:
     ecv = enhanced_cv.get("enhanced_master_cv", enhanced_cv)
     challenges = enhanced_cv.get("challenges", ecv.get("challenges", enhanced_cv.get("enhanced_challenges", [])))[:3]
     career_goal = ecv.get("carrierGoal", "")
+    future_vision = ecv.get("futureVision", {})
 
     data_str = json.dumps({
         "confidence_scores": confidence_scores,
         "recent_challenges": challenges,
-        "career_goal": career_goal
-    })
+        "career_goal": career_goal,
+        "future_vision": future_vision
+    }, default=str)
 
     system_prompt = """
-    You are an AI Career Journey analyst. Given the candidate's confidence scores over time and recent challenges, provide:
+    You are an AI Career Journey analyst. Given the candidate's confidence scores over time, recent challenges, and future vision, provide:
     - Confidence Trajectory: A short string (e.g., "+15% boost", "Steady", "-5% declined").
     - AI Insight: Analyze the last 3 challenges to identify which skills are getting a boost.
     - Next Best Action: Analyze challenges and skills to suggest the next best action towards their career goal.
+    - progress: Based on the candidate's skills, challenges, and overall profile, estimate their progress toward achieving the future vision position by the target year. Return a string in this exact format: "You've grown X% toward your <target_year> vision" where X is your estimated percentage and <target_year> is from the futureVision target field.
     
     Output exactly in this JSON format:
     {
@@ -147,7 +150,8 @@ async def get_growth_timeline(user_id: str) -> GrowthTimelineResponse:
             "action": "string",
             "new_skill": "string",
             "profile_score_increase": "string"
-        }
+        },
+        "progress": "string"
     }
     """
 
@@ -219,7 +223,7 @@ async def get_roadmap(user_id: str) -> RoadmapResponse:
         "career_goal": career_goal,
         "skills": skills,
         "challenges": challenges
-    })
+    }, default=str)
 
     system_prompt = """
     You are an AI Career Roadmap planner. Based on the user's current role, career goal, skills, and challenges, generate a comprehensive roadmap.
@@ -307,7 +311,7 @@ async def get_opportunities(user_id: str) -> OpportunitiesResponse:
         response_format={ "type": "json_object" },
         messages=[
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Profile: {json.dumps(data_to_analyze)}"}
+            {"role": "user", "content": f"Profile: {json.dumps(data_to_analyze, default=str)}"}
         ]
     )
 
